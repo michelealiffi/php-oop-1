@@ -1,7 +1,25 @@
 <?php
 
-require_once __DIR__ . "/models/movie.php";
+require_once __DIR__ . "/Models/Movie.php";
 require_once __DIR__ . "/db.php";
+
+$movie1 = new Movie("Pokemon");
+$movie2 = new Movie("Star Wars");
+$movie3 = new Movie("The Ring");
+
+$error = "";
+
+try {
+    $movie1->setTitle("Pokemon!!!");
+    $movie1->setDuration(104);
+    $movie1->setYear(1999);
+    $movie1->setGenre("animation", "drama");
+    $movie1->setActor(new Actor("Ash", "Ketchum"));
+    $movie1->setActor(new Actor("Jhonny", "Silverhand"));
+
+} catch (Exception $error) {
+    $error = $error->getMessage();
+}
 
 ?>
 
@@ -18,12 +36,27 @@ require_once __DIR__ . "/db.php";
 
 <body>
     <h1 class="text-center">Movies</h1>
-    <h3>List</h3>
-    <ul>
-        <li>
-            <?php echo $movie1 ?>
-        </li>
-    </ul>
+    <div class="container">
+        <h3>List</h3>
+        <?php if($error) : ?>
+            <div>Errore: <?php echo $error ?></div>
+        <?php else : ?>
+        <ul>
+            <?php foreach ($movie_list as $movie) : ?>
+                <li>
+                    <h5><?php echo $movie->getTitle(); ?></h5>
+                    <p><?php echo $movie->getDuration(); ?></p>
+                    <p><?php echo $movie->getGenre(); ?></p>
+                </li>
+            <?php endforeach ?>
+            <?php foreach ($movie["actors"] as $actor) : ?>
+                <p><?php echo $actor?->getName() ?> </p>
+                <p><?php echo $actor?->getSurname() ?></p>
+                <?php if ($actor !== end($movie["actors"])) : ?>
+                <?php endif ?>
+            <?php endforeach ?>
+        </ul>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 

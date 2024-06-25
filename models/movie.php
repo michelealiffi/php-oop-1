@@ -1,16 +1,21 @@
 <?php
 
+require_once __DIR__ . '/Actor.php';
+
 class Movie
 {
     private string $title;
     private int $duration;
-    private string $genre;
+    private int $year;
+    private array $genres = [];
+    private array $actors = [];
+    private static int $movie_id = 0;
 
-    public function __construct(string $title, int $duration, string $genre)
+    public function __construct(string $title, int $duration, int $year, array $genre, array $actors)
     {
         $this->title = $title;
         $this->duration = $duration;
-        $this->genre = $genre;
+        $this->year = $year;
     }
 
     public function getTitle(): string
@@ -33,25 +38,39 @@ class Movie
         $this->duration = $duration;
     }
 
-    public function getGenre(): string
+    public function getYear(): int
     {
-        return $this->genre;
+        return $this->year;
     }
 
-    public function setGenre(string $genre): void
+    public function setYear(int $year): void
     {
-        $this->genre = $genre;
+        if ($year < 1900) {
+            throw new Exception("Non è ancora uscito Star Wars");
+        }
+
+        $this->year = $year;
     }
-}
 
-$pokemon = new Movie("", 0, "");
+    public function getGenre(): array
+    {
+        return $this->genres;
+    }
 
-try {
-    $pokemon->setTitle("Pokemon!!!");
-    $pokemon->setDuration(104);
-    $pokemon->setGenre("animation");
+    public function setGenre(string ...$genre): void
+    {
+        if (!in_array($genre, $this->genres)) {
+            $this->genres = [...$this->genres, ...$genre];
+        }
+    }
 
-    var_dump($pokemon->getTitle(), $pokemon->getDuration(), $pokemon->getGenre());
-} catch (Exception $e) {
-    echo $e->getMessage();
+    public function getActors(): array
+    {
+        return $this->actors;
+    }
+
+    public function setActor(Actor $actor): void
+    {
+        $this->actors[] = $actor;
+    }
 }

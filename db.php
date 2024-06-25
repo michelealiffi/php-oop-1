@@ -1,14 +1,39 @@
 <?php
 
-require_once __DIR__ . "/models/movie.php";
-
-$movie1 = new Movie("Star Wars", 99, "Sci-fi");
-$movie2 = new Movie("Back to The Future", 45, "Sci-fi");
-$movie3 = new Movie("Matrix", 105, "Sci-fi");
-$movie4 = new Movie("The Avengers", 280, "Action");
-$movie5 = new Movie("Inside Out", 70, "Comedy");
-$movie6 = new Movie("The Two Popes", 175, "Drama");
-$movie7 = new Movie("Oppenheimer", 360, "Thriller");
-$movie8 = new Movie("The Ring", 10, "Horror");
-
-$movies = [$movie1, $movie2, $movie3, $movie4, $movie5, $movie6, $movie7, $movie8];
+$movies = [
+    [
+        "title" => $movie1->getTitle(),
+        "duration" => $movie1->getDuration(),
+        "year" => $movie1->getYear(),
+        "genres" => $movie1->getGenres(),
+        "actors" => $movie1->getActors()
+    ],
+    [
+        "title" => $movie2->getTitle(),
+        "duration" => $movie2->getDuration(),
+        "year" => $movie2->getYear(),
+        "genres" => $movie2->getGenres(),
+        "actors" => $movie2->getActors()
+    ],
+    [
+        "title" => $movie3->getTitle(),
+        "duration" => $movie3->getDuration(),
+        "year" => $movie3->getYear(),
+        "genres" => $movie3->getGenres(),
+        "actors" => $movie3->getActors()
+    ],
+    [
+        "title" => $movie4->getTitle(),
+        "duration" => $movie4->getDuration(),
+        "year" => $movie4->getYear(),
+        "genres" => $movie4->getGenres(),
+        "actors" => $movie4->getActors()
+    ],
+    [
+        "title" => $movie5->getTitle(),
+        "duration" => $movie5->getDuration(),
+        "year" => $movie5->getYear(),
+        "genres" => $movie5->getGenres(),
+        "actors" => $movie5->getActors()
+    ],
+];
